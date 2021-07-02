@@ -46,7 +46,19 @@ body {
     border-top: 1px solid #fff;
     border-bottom: 1px solid #e8e8e8;
     padding: 10px 15px;
-    /* font-size: 13px; */
+    width: 95%;
+}
+
+.post-id {
+    width: 10%;
+}
+
+.post-title {
+    width: 20%;
+}
+
+.post-body {
+    width: 60%;
 }
 
 .name-txt {
@@ -55,6 +67,16 @@ body {
 
 .email-txt {
     margin-right: 130px;
+    margin-top: 10px;
+}
+
+.post-title-txt {
+    margin-right: 30%;
+    margin-top: 10px;
+}
+
+.post-body-txt {
+    margin-right: 20%;
     margin-top: 10px;
 }
 

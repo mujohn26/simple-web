@@ -4,7 +4,7 @@ const select = (selector) => {
 const tableBodyElement = select("#users-list");
 const messageContainerElement = select("#message-div");
 const postsTableBodyElement = select("#posts-list");
-const postsmessageContainer = select("#message-div-post");
+const messagePost = select("#message-div-post");
 const loadUsers = () => {
     messageContainerElement.innerHTML = "Loading users....";
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -13,27 +13,27 @@ const loadUsers = () => {
                 return response.json();
             } else {
                 messageContainerElement.innerHTML =
-                    "Oops, something went wrong retrieving users...";
+                    "We can't retrieve users at this moment";
             }
         })
         .then((json) => {
             if (!json.length) {
                 messageContainerElement.innerHTML = "No users found!";
             } else {
-                let tableRow = "";
+                let row = "";
                 json.map((user) => {
-                    tableRow += "<div class='data-row'>";
-                    tableRow += "<div class='name-row'>" + user.name + "</div>";
-                    tableRow += "<div>" + user.email + "</div>";
-                    tableRow += `<div class='action-row'><button onClick='getPosts(${user.id});' class='user-button'>Get User’s Posts</button></div>`;
-                    tableRow += "</div>";
+                    row += "<div class='data-row'>";
+                    row += "<div >" + user.name + "</div>";
+                    row += "<div>" + user.email + "</div>";
+                    row += `<div ><button onClick='getPosts(${user.id});' class='user-button'>Get User’s Posts</button></div>`;
+                    row += "</div>";
                 });
-                tableBodyElement.innerHTML = tableRow;
+                tableBodyElement.innerHTML = row;
                 messageContainerElement.setAttribute("style", "display: none;");
             }
         })
         .catch((error) => {
-            messageContainerElement.innerHTML = `Oops, error occured....: ${error}`;
+            messageContainerElement.innerHTML = `error occured: ${error}`;
         });
 };
 const getPosts = (userId) => {

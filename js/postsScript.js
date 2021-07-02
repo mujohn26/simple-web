@@ -2,36 +2,36 @@ const select = (selector) => {
     return document.querySelector(selector);
 };
 const postsTableBodyElement = select("#posts-list");
-const postsmessageContainer = select("#message-div-post");
+const messagePost = select("#message-div-post");
 const loadPosts = (userId) => {
-    postsmessageContainer.innerHTML = "Loading posts....";
+    messagePost.innerHTML = "Loading posts....";
     fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
         .then((response) => {
             if (response.ok) {
                 return response.json();
             } else {
-                postsmessageContainer.innerHTML =
-                    "Oops, something went wrong retrieving user posts...";
+                messagePost.innerHTML =
+                    "We can't retrieve users at this moment";
             }
         })
         .then((json) => {
             if (!json.length) {
-                postsmessageContainer.innerHTML = "No posts found!";
+                messagePost.innerHTML = "No posts found!";
             } else {
-                let tableRow = "";
+                let row = "";
                 json.map((post) => {
-                    tableRow += "<div class='data-row'>";
-                    tableRow += "<div> #" + post.id + "</div>";
-                    tableRow += "<div>" + post.title + "</div>";
-                    tableRow += "<div>" + post.body + "</div>";
-                    tableRow += "</div>";
+                    row += "<div class='data-row'>";
+                    row += "<div class='post-id'> #" + post.id + "</div>";
+                    row += "<div class='post-title'>" + post.title + "</div>";
+                    row += "<div class='post-body'>" + post.body + "</div>";
+                    row += "</div>";
                 });
-                postsTableBodyElement.innerHTML = tableRow;
-                postsmessageContainer.setAttribute("style", "display: none;");
+                postsTableBodyElement.innerHTML = row;
+                messagePost.setAttribute("style", "display: none;");
             }
         })
         .catch((error) => {
-            postsmessageContainer.innerHTML = `Oops, error occured....: ${error}`;
+            messagePost.innerHTML = `Oops, error occured....: ${error}`;
         });
 };
 const urlSearchParams = new URLSearchParams(window.location.search);
